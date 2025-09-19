@@ -44,9 +44,14 @@
         }
         
         .product-img {
-            height: 200px;
-            object-fit: cover;
-        }
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 600px;     /* biar tidak kebesaran di card */
+    object-fit: contain;
+    filter: none !important;
+    image-rendering: auto;
+}
         
         .btn-primary {
             background-color: var(--primary-color);
@@ -381,10 +386,14 @@ input.error, select.error, textarea.error {
 
 
 /* === Efek Produk HD === */
-.card img, 
+.card img,
 .product-img {
-    filter: brightness(1.0) contrast(1.2) saturate(1.2);
-    transition: all 0.4s ease-in-out;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+    filter: none !important;
+    image-rendering: auto;
 }
 
 .card:hover img, 
@@ -1111,26 +1120,20 @@ document.addEventListener('DOMContentLoaded', function() {
 <label class="form-label" for="jam">Jam Pengantaran</label>
 <select autocomplete="off" class="form-select" id="jam">
 <option value="">Pilih jam pengantaran</option>
-<option value="06:00">06:00</option>
 <option value="08:00">08:00</option>
 <option value="10:00">10:00</option>
 <option value="13:00">13:00</option>
 <option value="15:00">15:00</option>
-<option value="17:00">17:00</option>
-<option value="19:00">19:00</option>
 </select>
 </div>
 <div class="mb-3 hidden" id="jam-ambil-container">
 <label class="form-label" for="jam-ambil">Jam Pengambilan</label>
 <select autocomplete="off" class="form-select" id="jam-ambil">
 <option value="">Pilih jam pengambilan</option>
-<option value="06:00">06:00</option>
 <option value="08:00">08:00</option>
 <option value="10:00">10:00</option>
 <option value="13:00">13:00</option>
 <option value="15:00">15:00</option>
-<option value="17:00">17:00</option>
-<option value="19:00">19:00</option>
 </select>
 </div>
 <div class="mb-3">
