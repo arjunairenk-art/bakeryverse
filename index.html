@@ -653,6 +653,42 @@ body {
     }
 }
 
+
+
+/* === Tampilan Produk 4K Premium === */
+.card img,
+.product-img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 700px;
+    object-fit: contain;
+
+    /* Efek visual 4K */
+    background: #fff;
+    border-radius: 20px;
+    padding: 8px;
+    filter: brightness(1.05) contrast(1.4) saturate(1.5) drop-shadow(0 6px 20px rgba(0,0,0,0.3));
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    transition: all 0.4s ease-in-out;
+}
+
+.card:hover img,
+.card:hover .product-img {
+    transform: scale(1.1);
+    filter: brightness(1.1) contrast(1.5) saturate(1.6);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+
+/* Tambah kecerahan khusus untuk produk gelap */
+.product-img.brighten {
+    filter: brightness(1.2) contrast(1.4) saturate(1.5) drop-shadow(0 8px 24px rgba(0,0,0,0.35));
+}
+.product-img.brighten:hover {
+    filter: brightness(1.3) contrast(1.5) saturate(1.6);
+}
 </style>
 <!-- Tambahkan SDK Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js">
@@ -2740,5 +2776,54 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 </script>
-</body>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('img.product-img').forEach(img => {
+        if (!img.hasAttribute('srcset')) {
+            let src = img.getAttribute('src');
+            if (src) {
+                img.setAttribute('srcset', 
+                    src.replace('.jpg','-500.webp 500w,')
+                       .replace('.png','-500.webp 500w,')
+                       + src.replace('.jpg','-1000.webp 1000w,')
+                       .replace('.png','-1000.webp 1000w,')
+                       + src.replace('.jpg','-2000.webp 2000w,')
+                       .replace('.png','-2000.webp 2000w,')
+                       + src.replace('.jpg','-4000.webp 4000w')
+                       .replace('.png','-4000.webp 4000w')
+                );
+                img.setAttribute('sizes', '(max-width: 768px) 100vw, 50vw');
+                img.setAttribute('loading', 'lazy');
+            }
+        }
+    });
+});
+</script><script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('img.product-img').forEach(img => {
+        let src = img.getAttribute('src');
+        if (src && !img.hasAttribute('srcset')) {
+            let base = src.replace(/\.(jpg|jpeg|png)$/i, "");
+            img.setAttribute("srcset", 
+                base + "-500.webp 500w, " +
+                base + "-1000.webp 1000w, " +
+                base + "-2000.webp 2000w, " +
+                base + "-4000.webp 4000w"
+            );
+            img.setAttribute("sizes", "(max-width: 768px) 100vw, 50vw");
+            img.setAttribute("loading", "lazy");
+            img.setAttribute("src", base + "-1000.webp"); // default menengah
+        }
+    });
+});
+</script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('img.product-img').forEach(img => {
+    let src = img.getAttribute('src') || "";
+    if (src.toLowerCase().includes("bolen") || src.toLowerCase().includes("brownies")) {
+      img.classList.add("brighten");
+    }
+  });
+});
+</script></body>
 </html>
